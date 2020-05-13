@@ -1,23 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+<!-- エラーメッセージ。なければ表示しない -->
+@if ($errors->any())
+<ul>
+    @foreach($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+</ul>
+@endif
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+<!-- フォーム -->
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    @csrf
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <label for="photo">画像ファイル:</label>
+    <input type="file" class="form-control" name="file">
+    <br>
+    <input type="submit">
+</form>
 @endsection
