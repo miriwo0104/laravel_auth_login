@@ -23,3 +23,5 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::post('/upload', 'HomeController@upload');
+
+Route::get('/test', 'HomeController@test');
