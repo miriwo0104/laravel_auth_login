@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use App\User;
 //メール送信用ファサードを紐づける
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TestSendMail;
 
 class SendMailCommand extends Command
 {
@@ -47,10 +48,11 @@ class SendMailCommand extends Command
         foreach ($users_infos as $users_info) {
             echo $users_info['email']."\n";
 
-            Mail::raw("これはテストメールです", function($message) use ($users_info)
+/*             Mail::raw("これはテストメールです", function($message) use ($users_info)
             {
                 $message->to($users_info->email)->subject('test');
-            });
+            }); */
+            Mail::to($users_info['email'])->send(new TestSendMail());
         }
     }
 }
